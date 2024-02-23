@@ -5,10 +5,10 @@ class DataGenerator:
     def __init__(self) -> None:
         pass
 
-    def download_image():
+    def download_images():
         pass
 
-    def filter_image():
+    def filter_images():
         pass
 
     def infer():
