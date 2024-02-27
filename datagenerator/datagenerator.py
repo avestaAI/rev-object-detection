@@ -1,36 +1,46 @@
 import torch
-import logging
-
+import pandas as pd
 class DataGenerator:
 
     def __init__(self) -> None:
-        self.model = torch.hub.load('yolov5','custom', path="./yolov5/runs/train/exp5/weights/best.pt",source="local")
+        self.model = torch.hub.load('./models/yolov5','custom', path="./models/yolov5/runs/train/exp/weights/best.pt", source="local")
         self.images_info = []
 
-    def download_images(self,image_link):
-        #download image from link
-
-        return img # Image RGB arr
-
-    def filter_images():
+    @staticmethod
+    def load_csv(self, csv_path):
+        data_df = pd.read_csv(csv_path)
+        return data_df
+    
+    @staticmethod
+    def create_link():
         pass
 
-    def infer(self,img):
-        result = self.model(img)
-        self.image_info['class'] = list(result.pandas().xyxy[0]['class'])
-        self.image_info['name'] = list(result.pandas().xyxy[0]['name'])
-        self.image_info['xyxy'] = list(result.xyxy[0][:,:-2])
-        self.image_info['confidence'] = list(result.xyxy[0][:,4])
     
-    def load_csv(self, csv_path):
-        image_links = None #load csv from csv_path to list
-        for link in image_links:
-            self.image_info = {}
-            img = download_images(link)
-            infer(img)
-            self.images_info.append(self.image_info)
-            filter_images()
+        
 
+    
+    
+
+    # def download_image(self, image_link):
+    #     self.image_info = {}
+        
+    #     #download image from link
+
+    #     # return img # Image RGB arr
+        
+
+    # def filter_images():
+    #     pass
+
+    # def infer(self,img):
+    #     try:
+    #         result = self.model(img)
+    #         self.image_info['infer'] = eval(result.pandas().xyxy[0].to_json(orient='records'))
+    #     except Exception as e:
+    #         print(f"Error at infering image : {self.image_info['name']}")
+    
+
+        
 
 
 
