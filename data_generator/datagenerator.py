@@ -76,7 +76,7 @@ class DataGenerator:
         if len(image_info['predictions']) == 0:
             full_path = f"{base_path}/no_predictions"
             image_name = f"{image_info['listingImageId']}"
-            DataGenerator.save_image(image=image,image_path=full_path,image_name=image_name)
+            DataGenerator.save_image(image=image, image_path=full_path, image_name=image_name)
     
         elif len(image_info['predictions']) == 1:
             category = image_info['predictions'][0]['name']
@@ -115,7 +115,7 @@ class DataGenerator:
                 print("\n\nRecords saved to JSON!!\n\n")
 
 
-    def download_and_infer(self, data_dict, start, end, save_interval, sleep_interval):
+    def download_and_infer(self, data_dict, start, end, prev_img_number, save_interval, sleep_interval):
         try:
             index = 0
             failed_images = 0
@@ -128,8 +128,8 @@ class DataGenerator:
                     if len(image.getbands()) <= 3:
                         results = self.infer(image)
                         data_dict[index]['predictions'] = results
-                        data_dict[index]['imageNumber'] = start + index
-                        print("Image Number:", start + index)
+                        data_dict[index]['imageNumber'] = (prev_img_number + 1) + index
+                        print("Image Number:", (prev_img_number + 1) + index)
 
                         DataGenerator.save_and_filter_image(image, data_dict[index])
                     
