@@ -7,8 +7,8 @@ import json
 
 class ImageDownloader:
 
-    def __init__(self) -> None:
-        pass
+    def __init__(self, base_path) -> None:
+        self.base_path = base_path
 
     @staticmethod
     def get_image_data(image_link):
@@ -31,12 +31,12 @@ class ImageDownloader:
             print(f"Saved: {image_name}.jpg")
 
     
-    @staticmethod
-    def save_info_json(images_info):
-        if not os.path.exists("./data/interim/batch_2/info"):
-            os.mkdir("./data/interim/batch_2/info")
+    def save_info_json(self, images_info):
 
-        destination_path = "./data/interim/batch_2/info/images_info.json"
+        if not os.path.exists(f"{self.base_path}/info"):
+            os.mkdir(f"{self.base_path}/info")
+
+        destination_path = f"{self.base_path}/info/images_info.json"
 
         if not os.path.exists(destination_path):
             with open(destination_path, "w") as outfile: 
