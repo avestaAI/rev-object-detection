@@ -22,14 +22,11 @@ class DataFetcher:
             skiprows=range(1, self.starting_point), 
             nrows=(self.ending_point - self.starting_point + 1)
         )
-
-        images_info_ll = LinkedList()
-        
+        images_info_arr = []
         for index, row in df.iterrows():
             row_dict = row.to_dict()
             edited_link = self._create_image_link(row_dict["imageLink"])
             row_dict["imageLink"] = edited_link
-            images_info_ll.insert_at_end(row_dict)
-            # yield row_dict
-        
-        return images_info_ll
+            images_info_arr.append(row_dict)
+
+        return images_info_arr
