@@ -9,6 +9,8 @@ from requests.exceptions import ConnectionError
 import time
 
 config = {
+    "start": 1,
+    "end": 20,
     "save_interval": 10,
     "sleep_interval": 10,
     "last_img_number": 0
@@ -19,8 +21,8 @@ def main():
     start_time = time.time()
     fetcher = DataFetcher(
         "./data/raw/listings_images.csv", 
-        starting_point=1, 
-        ending_point=30
+        starting_point=config["start"], 
+        ending_point=config["end"]
     )
     downloader = ImageDownloader(base_path)
     analyzer = ObjectAnalyzer()
