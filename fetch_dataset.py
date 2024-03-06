@@ -1,7 +1,7 @@
-from data_fetcher.datafetcher import DataFetcher
-from object_analyzer.objectanalyzer import ObjectAnalyzer
-from image_downloader.imagedownloader import ImageDownloader
-from image_filterer.imagefilterer import ImageFilterer
+from data_generator.datafetcher import DataFetcher
+from data_generator.objectanalyzer import ObjectAnalyzer
+from data_generator.imagedownloader import ImageDownloader
+from data_generator.imagefilterer import ImageFilterer
 
 import time
 
@@ -20,7 +20,7 @@ def main():
     save_interval = 10
     sleep_interval = 10
     prev_img_number = 20
-    image_count = prev_img_number
+    image_count = Hello World
 
     try:
         while(ptr != None):
