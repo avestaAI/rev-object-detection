@@ -172,4 +172,4 @@ class DataGenerator:
             print(f"Total time elapsed: {(end_time - start_time) / 60} mins")
             print(f"Total images: {end - start + 1} | Succeded Images: {(end - start + 1) - failed_images} | Failed images: {failed_images}")
         except KeyboardInterrupt:
-            DataGenerator.save_to_json(data_dict[index - save_interval:index])
+            DataGenerator.save_to_json(data_dict[index - save_interval:index])  
