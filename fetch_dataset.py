@@ -10,7 +10,7 @@ import time
 
 config = {
     "start": 1,
-    "end": 20,
+    "end": 50,
     "save_interval": 10,
     "sleep_interval": 10,
     "last_img_number": 0
@@ -34,6 +34,7 @@ def main():
     images_cache = []
     index = 0
     failed_images = 0
+    image_count = 0
 
     try:
         while(index < len(images_information)):
@@ -45,15 +46,19 @@ def main():
 
                 # Checking whether the images contains alpha channel or not
                 if len(image_data.getbands()) <= 3:
+                    downloader.save_image(image_data, f"{base_path}/all", image_information["listingImageId"])
+
                     results = analyzer.analyze_objects(image_data)
                     image_information["predictions"] = results
 
                     destination_path, image_name = filterer.filter_image(image_information)
-                    downloader.save_image(image_data, destination_path, image_name)
-                    statistics.record_stats(image_information)
+                    if destination_path != None:
+                        downloader.save_image(image_data, destination_path, image_name)
+                        statistics.record_stats(image_information)
 
-                    image_information["imageNumber"] = (index + 1) + config["last_img_number"]
-                    images_cache.append(image_information)
+                        image_information["imageNumber"] = (image_count + 1) + config["last_img_number"]
+                        images_cache.append(image_information)
+                        image_count += 1
 
                 else:
                     print("Alpha channel containing image found! Discarding it...")
@@ -62,9 +67,9 @@ def main():
                     continue
 
             except ConnectionError as e:
-                    print("Connection error, retrying after 10 seconds")
-                    time.sleep(10)
-                    continue
+                print("Connection error, retrying after 10 seconds")
+                time.sleep(10)
+                continue
             
             except UnidentifiedImageError as e:
                 print("Image not found in the given link!")
@@ -73,7 +78,7 @@ def main():
                 continue
 
             except Exception as e:
-                print("Something went wrong!")
+                print("Something went wrong!", e)
                 failed_images += 1
                 images_information.pop(index)
                 continue
