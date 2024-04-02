@@ -10,14 +10,14 @@ import time
 
 config = {
     "start": 1,
-    "end": 50,
-    "save_interval": 10,
-    "sleep_interval": 10,
+    "end": 19741,
+    "save_interval": 50,
+    "sleep_interval": 100,
     "last_img_number": 0
 }
 
 def main():
-    base_path = "./data/interim/batch_2"
+    base_path = "./data/interim/garage_batch_1"
     start_time = time.time()
     fetcher = DataFetcher(
         "./data/raw/listings_images.csv", 
